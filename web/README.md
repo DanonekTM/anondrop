@@ -51,42 +51,7 @@ For production deployment (e.g., with nginx):
 
 ## Nginx Configuration
 
-The application is designed to be served behind nginx. Example configuration:
-
-```nginx
-server {
-    listen 80;
-    server_name your_domain.com;
-
-    root /usr/share/nginx/html;
-    index index.html;
-
-    # Security headers
-    add_header X-Frame-Options "SAMEORIGIN";
-    add_header X-XSS-Protection "1; mode=block";
-    add_header X-Content-Type-Options "nosniff";
-    add_header Referrer-Policy "strict-origin-when-cross-origin";
-    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:;";
-
-    # Handle Next.js client-side routing
-    location / {
-        try_files $uri $uri.html $uri/ /index.html;
-        add_header Cache-Control "no-store, no-cache, must-revalidate";
-    }
-
-    # Handle secret view routes
-    location ~ ^/view/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$ {
-        try_files $uri $uri.html $uri/index.html /view/placeholder/index.html;
-        add_header Cache-Control "no-store, no-cache, must-revalidate";
-    }
-
-    # Cache static files
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff2)$ {
-        expires 30d;
-        add_header Cache-Control "public, no-transform";
-    }
-}
-```
+The application is designed to be served behind nginx. Example configuration found in `nginx.conf`.
 
 ## Project Structure
 
