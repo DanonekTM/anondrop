@@ -1,0 +1,70 @@
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!*.example
+
+# Secret storage and logs
+data/secrets/*
+!data/secrets/.gitkeep
+logs/
+*.log
+
+# Binary files
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with 'go test -c'
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Test directories and files
+**/testdata/
+secrets-test-*/
+logger-test-*/
+**/tmp/
+/tmp/
+
+# Dependency directories
+vendor/
+node_modules/
+
+# Next.js
+web/.next/
+web/out/
+web/build/
+web/.env.local
+web/.env.development.local
+web/.env.test.local
+web/.env.production.local
+!web/*.example
+web/npm-debug.log*
+web/yarn-debug.log*
+web/yarn-error.log*
+web/.pnpm-debug.log*
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Kubernetes
+kubeconfig
+*.kubeconfig
+
+# Temporary files
+*.tmp
+*~ 

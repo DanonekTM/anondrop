@@ -1,0 +1,62 @@
+server:
+  port: 8081
+  host: "localhost"
+  env: "development"
+
+security:
+  enable_captcha: true
+  server_side_encryption: true
+
+rate_limit:
+  enabled: true
+  routes:
+    create_secret:
+      requests_per_hour: 1000
+      requests_per_minute: 100
+    view_secret:
+      requests_per_hour: 1000
+      requests_per_minute: 2
+    view_secret_by_name:
+      requests_per_hour: 1000
+      requests_per_minute: 100
+  default:
+    requests_per_hour: 1000
+    requests_per_minute: 100
+
+secrets:
+  max_size_bytes: 500
+  max_custom_name_length: 32
+  default_expiry_minutes: 10
+  max_expiry_days: 7
+  storage_path: "data/secrets"
+  cleanup_interval_sec: 30 # Run cleanup every 5 minutes by default
+
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+
+cors:
+  allowed_origins:
+    - "http://localhost:8081"
+    - "http://localhost:3000"
+    - "http://127.0.0.1:3000"
+
+logging:
+  enabled: true
+  console_output: true # Will be ignored in production
+  directory: "/logs"
+  archive_directory: "/logs/archives"
+  rotation:
+    size_mb: 10 # Rotate when file reaches 10MB
+  retention:
+    days: 30 # Keep archived logs for 30 days
+  files:
+    error:
+      filename: "errors.log"
+    access:
+      filename: "access.log"
+    ratelimit:
+      filename: "ratelimit.log"
+    application:
+      filename: "application.log"
