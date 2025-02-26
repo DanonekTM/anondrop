@@ -83,6 +83,13 @@ func (h *SecretAPIHandler) CreateSecret(c *gin.Context) {
 		return
 	}
 
+	// Check encrypted content size
+	encryptedSize := len(req.EncryptedContent.Encrypted) + len(req.EncryptedContent.Salt) + len(req.EncryptedContent.IV)
+	if encryptedSize > h.config.Secrets.MaxSizeBytes {
+		c.JSON(http.StatusBadRequest, gin.H{"error": fmt.Sprintf("Secret size exceeds maximum allowed size of %d bytes", h.config.Secrets.MaxSizeBytes)})
+		return
+	}
+
 	// Validate custom name if provided
 	if err := models.ValidateCustomName(req.CustomName); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
