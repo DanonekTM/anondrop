@@ -443,10 +443,10 @@ export function CreateSecret() {
       </Card>
 
       <Dialog open={successDialogOpen} onOpenChange={setSuccessDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
+        <DialogContent className="w-[calc(100%-2rem)] sm:max-w-lg mx-auto">
+          <DialogHeader className="!text-left">
             <DialogTitle>Secret Created Successfully</DialogTitle>
-            <DialogDescription className="space-y-6 pt-4">
+            <DialogDescription className="space-y-6 pt-4 text-left">
               <div className="text-sm space-y-4">
                 <div>{getSecretDescription()}</div>
                 <div>After that, it will be permanently deleted.</div>
@@ -462,18 +462,19 @@ export function CreateSecret() {
                 </div>
               )}
               <div className="border-t pt-4">
-                <div className="flex items-center space-x-2 bg-muted p-3 rounded-lg">
-                  <Link className="h-4 w-4 text-muted-foreground" />
+                <div className="flex items-center space-x-2 bg-muted p-3 rounded-lg overflow-hidden max-w-full">
+                  <Link className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                   <Input
                     value={secretUrl}
                     readOnly
-                    className="bg-transparent border-none"
+                    className="bg-transparent border-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-none focus-visible:border-none overflow-x-auto whitespace-nowrap text-ellipsis cursor-text min-w-0 flex-1"
+                    style={{ scrollbarWidth: "thin" }}
                   />
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={handleCopy}
-                    className="shrink-0"
+                    className="flex-shrink-0"
                   >
                     {copied ? (
                       <Check className="h-4 w-4" />
